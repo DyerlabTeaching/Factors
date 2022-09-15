@@ -1,5 +1,5 @@
 project:
-  title: "Dyerlab-Template"
+  title: "Factors"
   output-dir: docs
 
 format:
@@ -14,10 +14,17 @@ format:
     footnotes-hover: true
     link-external-icon: true
   revealjs:
-    self-contained: false
+    self-contained: true
     code-fold: false
     code-overflow: wrap
     footer: "[Dyerlab](https://dyerlab.org)"
+    background-transition: fade
+    theme: default
+    logo: "media/ces_logo.png"
+    title-slide-attributes: 
+      data-background-image: "media/contour.png"
+      data-background-position: "right"
+      data-background-size: initial
   
 
 
