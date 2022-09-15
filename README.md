@@ -4,22 +4,21 @@
 
 ## Impetus
 
-This is a description of the basic template file for a course component repository
+The `factor` data type allows us to define categories on our data for grouping observations and measurements into either mutulally exclusive groups (e.g., populations, rivers, species) or into groupings that have some kind of underlying ordination meaning they are configured such that the `>` or `<` operator makes sense (e.g., Monday < Tuesday, # of fertilizer, etc.). 
 
 ## Student Learning Objectives
 
 At the end of this topic, you should be able to:  
- - *Learning Objective 1* 
- - *Learning Objective 2*
- - *Learning Objective 3* 
+ - Create factor data *de novo* from raw data. 
+ - Describe the differences between ordered and unordered factor data.
+ - Reorganize factor levels and manipulate factors using `forcats`
 
 ## Content
- - [Slides](slides.html)
- - [Narrative](narrative.html)
- - [In Class](in-class.html)
- - [Homework](homework.html)
- - Data Set
 
+ - The [Slides](slides.html) used to introduce factor data types.
+ - A longer [Narrative](narrative.html) of the topic content.
+ - [In Class](in-class.html) notes taken during the introduction of factors in class.
+ 
 ## Contact Information
 
 If you need to contact me, I am available at:  
