@@ -1,6 +1,7 @@
 # Topic Title
 
 
+
 ## Impetus
 
 This is a description of the basic template file for a course component repository
