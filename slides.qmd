@@ -3,81 +3,649 @@ title: "Factors"
 subtitle: "Defining Categorical Types"
 author: Rodney Dyer, PhD
 format: revealjs
+execute:
+  echo: true
 ---
 
+## Topics Covered
+
+In this *brief* presentation, we'll be introducing the following items:
+
+- Factor Data Types
+- The {{< fa cat >}} {{< fa cat >}} {{< fa cat >}} {{< fa cat >}} library
+- Workflows & Pipes
+- Tables
+
+# Categorical Data {background-color="black" background-image="media/contour.png" background-size="initial" background-position="right"}
 
 
-# Transition {background-color="black" background-image="media/contour.png" background-size="initial" background-position="right"}
+## Categorical Data Types
 
-## Bullets
 
-When you click the **Render** button a document will be generated that includes:
+&nbsp;
 
--   Content authored with markdown
--   Output from executable code
+::::{.columns}
 
-## Some Title
+:::{.column width="50%"}
+Unique and individual grouping that can be applied to a study design.  
 
-::: {layout-ncol="2"}
-### List One
-
--   Item A
--   Item B
--   Item C
-
-### List Two
-
--   Item X
--   Item Y
--   Item Z
+- Case sensitive  
+- Can be ordinal  
+- Typically defined as `character` type
 :::
 
-## Another Slide
 
-::: {layout-ncol="2"}
-### The code
-
-```{r eval=FALSE, echo=TRUE}
-hist( rnorm(1200) )
-```
-
-### The Plot
-
-```{r echo=FALSE}
-hist( rnorm( 1200 ) )
+:::{.column width="50%"}
+```{r}
+weekdays <- c("Monday","Tuesday","Wednesday",
+              "Thursday","Friday","Saturday", 
+              "Sunday")
+class( weekdays )
+weekdays
 ```
 :::
 
-## And another slide
 
-::: {layout-ncol="2"}
--   Item X
--   Item Y
--   Item Z
+::::
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur gravida eu erat et fring. Morbi congue augue vel eros ullamcorper, eget convallis tortor sagittis. Fusce sodales viverra mauris a fringilla. Donec feugiat, justo eu blandit placerat, enim dui volutpat turpis, eu dictum lectus urna eu urna. Mauris sed massa ornare, interdum ipsum a, semper massa.
-:::
 
-## Code
 
-When you click the **Render** button a presentation will be generated that includes both content and the output of embedded code. You can embed code like this:
 
-```{r echo=TRUE}
-px <- 0.75
-py <- 0.25
-m <- 0.1
-ret <- rep(NA,100)
-ret[1] <- py
-for( i in 2:100) {
-  ret[i] <- (1-m)*ret[(i-1)] + px * m   
-}
-```
+## Making Up Data 🤷🏻‍
 
-## Results
+The function `sample()` allows us to take a random sample of elements from a vector of potential values.  
+
 
 ```{r}
-plot( ret, type="l")
+chooseOne <- sample( c("Heads","Tails"), size=1 )
+chooseOne
 ```
+
+
+## Making Up More Data 🤷🏻‍ {.smaller}
+
+However, if we want a large number items, we can have them with or without replacement.
+
+```{r}
+sample( c("Heads","Tails"), size=10, replace=TRUE )
+```
+
+
+
+
+## Weekdays as example 
+
+We'll pretend we have a bunch of data related to the day of the week.
+
+```{r}
+days <- sample( weekdays, size=40, replace=TRUE)
+summary( days )
+days
+```
+
+
+
+## Turn it into a `factor`
+
+```{r}
+data <- factor( days )
+is.factor( data )
+class( data )
+```
+
+
+## Data Type Specific Printing & Summaries
+
+
+```{r}
+data
+```
+
+
+
+## Factor Levels
+
+Each factor variable is defined by the `levels` that constitute the data.  This is a .red[finite] set of unique values
+
+```{r}
+levels( data)
+```
+
+
+
+# Ordinal Categorical Data {background-color="black" background-image="media/contour.png" background-size="initial" background-position="right"}
+
+
+
+
+## Factor Ordination
+
+If a factor is not ordinal, it does nota allow the use relational comparison operators.
+
+```{r}
+#| warning: true
+data[1] < data[2]
+```
+
+## Ordination = Ordered
+
+```{r}
+is.ordered( data )
+```
+
+
+
+## Ordination of Factors {.smaller}
+
+:::: {.columns}
+
+::: {.column width="50%"}
+Where ordination matters:
+
+- Fertilizer Treatments in KG of N<sub>2</sub> per hectare: 10 kg N<sub>2</sub>, 20 N<sub>2</sub>, 30 N<sub>2</sub>,  
+
+- Days of the Week: `Friday` is not followed by `Monday`,   
+
+- Life History Stage: seed, seedling, juvenile, adult, etc.
+:::
+
+::: {.column width="50%"}
+::: {.fragment}
+Where ordination is irrelevant:
+
+- River   
+
+- State or Region   
+
+- Sample Location  
+:::
+:::
+
+::::
+
+
+## Making Ordered Factors
+
+
+
+
+```{r}
+data <- factor( days, ordered = TRUE)
+is.ordered( data )
+```
+
+
+
+:::{.fragment}
+```{r}
+data
+```
+
+The problem is that the default ordering is actually *alphabetical!*
+:::
+
+
+
+## Specifying the Order
+
+Specifying the Order of Ordinal Factors
+
+
+
+```{r}
+data <- factor( days, ordered = TRUE, levels = weekdays)
+data
+```
+
+::: {.fragment}
+<center><img src="https://media.giphy.com/media/KEYbcgR8oKQzwpwvLU/giphy-downsized-large.gif?cid=ecf05e47pagn8g10iwyysc86x07tgew8evhr1dbkahub7cuu&rid=giphy-downsized-large.gif&ct=g" height=200></center>
+
+:::
+
+
+## Sorting Is Now Relevant
+
+```{r}
+sort( data )
+```
+
+
+
+
+## Fixed Set of Levels
+
+You cannot assign a value to a factor that is not one of the pre-defined levels.
+
+```{r}
+#| error: true
+#| warning: true
+data[3] <- "Bob"
+```
+
+
+
+
+
+# `forcats` <br/> {{< fa cat >}} {{< fa cat >}} {{< fa cat >}} {{< fa cat >}} {background-color="black" background-image="media/contour.png" background-size="initial" background-position="right"}
+
+
+
+
+## The `forcats` library
+
+Part of the `tidyverse` group of packages.
+
+```{r}
+library(forcats)
+```
+
+This library has a lot of helper functions that make working with factors a bit easier.  I'm going to give you a few examples here but **strongly** encourage you to look a the cheat sheet for all the other options.
+
+
+## Counting Factors
+
+```{r}
+fct_count( data )
+```
+
+## Lumping Factors
+
+```{r}
+lumped <- fct_lump_min( data, min = 5)
+fct_count(  lumped )
+```
+
+## Reordering Factors
+
+We can reorder by *appearance order*, *observations*, or *numeric*
+
+*By Frequency*
+
+```{r}
+freq <- fct_infreq( data )
+levels( freq )
+```
+
+:::{.fragment}
+*By Order of Appearance*
+```{r}
+ordered <- fct_inorder( data )
+levels( ordered )
+```
+:::
+
+
+## Reorder Specific Levels
+
+```{r}
+newWeek <- fct_relevel( data, "Saturday", "Sunday")
+levels( newWeek )
+```
+
+
+
+## Dropping Missing Levels
+
+
+
+```{r}
+data <- sample( weekdays[1:5], size=40, replace=TRUE )
+data <- factor( data, ordered=TRUE, levels = weekdays )
+summary( data )
+```
+
+## Dropping Missing Levels
+
+
+
+```{r}
+fct_drop( data ) -> dropped
+summary( dropped )
+```
+
+
+
+
+## Example `iris` Data {.smaller}
+
+:::: {.columns}
+
+::: {.column width="50%"}
+<center>![Ronald Aylmer Fisher<br/>1890 - 1962](https://live.staticflickr.com/65535/51479325426_ee1d73fc4b_o_d.jpg)</center>
+:::
+
+::: {.column width="50%"}
+British polymath, mathematician, statistican, geneticist, and academic.  Founded things such as:
+
+ - Fundamental Theorem of Natural Selection,
+ - The `F` test,
+ - The `Exact` test,
+ - Linear Discriminant Analysis,
+ - Inverse probability
+ - Intra-class correlations
+ - Sexy son hypothesis.... 🥰
+:::
+
+::::
+
+
+
+## 
+
+```{r}
+head( iris, )
+summary( iris )
+```
+
+
+## Operating on Factor Levels
+
+*Question:* What is the mean and variance in sepal length for each of the *Iris* species?
+
+:::{.fragment}
+The `by()` function allows us to perform some *function* on *data* based upon a grouping *index*.
+:::
+
+:::{.fragment}
+```{r}
+#| eval: false
+by( data, index, function )
+```
+:::
+
+
+## `by()`
+
+Here we can apply the function `mean()` to the data on sepal length using the species factor as a category.
+
+```{r}
+by( iris$Sepal.Length, iris$Species, mean)
+```
+
+
+## `by()`
+
+The same for estimating variance
+
+```{r}
+by( iris$Sepal.Length, iris$Species, var)
+```
+
+
+## Missing Data
+
+Missing data is a *fact of life* and `R` is very opinionated about how it handles missing values.  Where this becomes tricky is when we are doing operations on data that has missing values.  `R` could take two routes:  
+
+1. It could ignore the data and give you the answer directly as if the data were not missing, or  
+2. It could let you know that there is missing data and make you do something about it.
+
+Fortunately, `R` took the second route.
+
+## Example
+
+```{r}
+df <- iris[, 4:5]
+df$Petal.Width[ c(2,6,12) ] <- NA
+summary( df )
+```
+
+## Screaming About NA
+
+If there is ONE `NA`, then most mathematical operaitons will not give you an answer.
+
+
+```{r}
+mean( df$Petal.Width )
+```
+
+:::{.fragment}
+To tell `R` that you are both *aware* and *ok* with the estimation of a mean value in the presence of missing data, you will have to change an optional argument passed to the function.
+
+```{r}
+mean( df$Petal.Width, na.rm = TRUE)
+```
+
+:::
+
+
+## Adding Optionals to `by()`
+
+You'll have to do the same thing when using `by()`
+
+```{r}
+by( df$Petal.Width, df$Species, mean, na.rm=TRUE )
+```
+
+
+# Workflows & Pipes {background-color="black" background-image="media/contour.png" background-size="initial" background-position="right"}
+
+
+## Hypothetical Workflow
+
+A common workflow consists of taking some data and performing several operations on it before we do some kind of analysis, summary, plot, or table.  It can be 
+
+```{r}
+#| eval: false
+data <- read_csv( file )
+function( data ) -> data1
+data2 <- func2( data1 )
+data3 <- func3( data2 )
+data4 <- func4( data3 )
+```
+
+:::{.fragment}
+This causes a lot of data duplication of the intermediate steps, extra typing, etc.  *Remember we strive for minimal effort!*
+:::
+
+
+## &nbsp;
+
+![The Treachery of Images](https://upload.wikimedia.org/wikipedia/en/b/b9/MagrittePipe.jpg)
+
+
+## The Pipe Operator
+
+In `R` we use this grammar.
+
+```{r}
+#| eval: false
+data %>% Y()
+```
+
+To take the values in `data` and pass them **as if you entered the data as the first argument** to the function `Y()`.
+
+:::{.fragment}
+These pipes can be chained together into a single operation.
+```{r}
+#| eval: false
+data %>%
+  func1() %>%
+  func2() %>%
+  func3() -> newData
+```
+:::
+
+## Tidyverse
+
+The `maggitr` library is part of the `tidyverse` group of packages, so it is always easier to just load in `tidy`
+
+```{r}
+#| error: false
+#| warning: false 
+library( tidyverse )
+```
+
+## Example
+
+Here is an operation that we've used as `summary( iris )` in the past, but it can be used in a pipe like this.
+
+```{r}
+iris %>% summary() 
+```
+
+
+# Tables <br/> <font size="6">`knitr + table -> kable`</font> {background-color="black" background-image="media/contour.png" background-size="initial" background-position="right"}
+
+
+## Let's Make a Table!
+
+The `knitr` library has some nice basic functionality to make tables.
+
+```{r}
+#| eval: true
+library( knitr )
+```
+
+
+## Make Summary Data Frame
+
+The table should have the species names and the averages length and width of sepals.
+
+Make a new data frame and set the First Column as species.
+
+```{r}
+df <- data.frame( Species = levels( iris$Species ) )
+df
+```
+
+
+## Make Summary Data Frame
+
+Use the `by()` function to estimate mean length and width
+
+```{r}
+df$Length <- by( iris$Sepal.Length, iris$Species, mean )
+df$Width <- by( iris$Sepal.Width, iris$Species, mean )
+df
+```
+
+
+
+
+
+## Making A Table
+
+So, now we'll use our new pipe operator to pass the data into the `kable()` fuction (n.b., look at `?kable` and see that the first argument is the data, which is being substituted by the pipe). 
+
+```{r}
+df %>%
+  kable() 
+```
+
+
+## Table captions
+
+```{r}
+df %>%
+  kable( caption = "Sepal size for three species of Fisher's iris data.")
+```
+
+
+
+## Making More Fancy Tables
+
+The library `kableExtras` has a lot more functionality that can be added to the table.
+
+```{r}
+library( kableExtra )
+```
+
+
+## Table Themes
+
+```{r}
+df %>%
+  kable() %>%
+  kable_paper()
+```
+
+## Table Themes
+
+```{r}
+df %>%
+  kable() %>%
+  kable_classic()
+```
+
+## Table Themes
+
+```{r}
+df %>%
+  kable() %>%
+  kable_classic_2()
+```
+
+## Table Themes
+
+```{r}
+df %>%
+  kable() %>%
+  kable_minimal()
+```
+
+## Table Themes
+
+```{r}
+df %>%
+  kable() %>%
+  kable_material()
+```
+
+## Table Themes
+
+```{r}
+df %>%
+  kable() %>%
+  kable_material_dark()
+```
+
+## Table Sizes
+
+```{r}
+df %>%
+  kable() %>%
+  kable_paper( full_width=FALSE)
+```
+
+
+
+## Table Positions
+
+```{r}
+df %>%
+  kable() %>%
+  kable_paper( full_width=FALSE, position="right")
+```
+
+## `position = "float_right"` {.smaller .scrollable}
+
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut blandit libero sit amet porta elementum. In imperdiet tellus non odio porttitor auctor ac sit amet diam. Suspendisse eleifend vel nisi nec efficitur. Ut varius urna lectus, ac iaculis velit bibendum eget. Curabitur dignissim magna eu odio sagittis blandit. 
+
+```{r}
+#| echo: false
+df %>%
+  kable() %>%
+  kable_paper( full_width=FALSE, position = "float_right")
+```
+
+Vivamus sed ipsum mi. Etiam est leo, mollis ultrices dolor eget, consectetur euismod augue. In hac habitasse platea dictumst. Integer blandit ante magna, quis volutpat velit varius hendrerit. Vestibulum sit amet lacinia magna. Sed at varius nisl. Donec eu porta tellus, vitae rhoncus velit.
+
+
+# {background-color="black" background-image="https://live.staticflickr.com/65535/51478614622_7b6fd7fe08_c_d.jpg" background-size="contain" background-position="center"}
+
+
+
+## Fancier Grouped Headers
+
+```{r}
+df %>% 
+  kable() %>% 
+  kable_paper( full_width=FALSE) %>%
+  add_header_above( c(" "=1, "Size (cm)" = 2))
+```
+
+
 
 ## Questions
 
