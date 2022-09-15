@@ -15,9 +15,9 @@ At the end of this topic, you should be able to:
 
 ## Content
 
- - The [Slides](slides.html) used to introduce factor data types.
- - A longer [Narrative](narrative.html) of the topic content.
- - [In Class](in-class.html) notes taken during the introduction of factors in class.
+ - The [Slides](https://dyerlabteaching.github.io/Factors/slides.html) used to introduce factor data types.
+ - A longer [Narrative](https://dyerlabteaching.github.io/Factors/narrative.html) of the topic content.
+ - [In Class](https://dyerlabteaching.github.io/Factors/in-class.html) notes taken during the introduction of factors in class.
  
 ## Contact Information
 
