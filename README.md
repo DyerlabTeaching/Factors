@@ -1,6 +1,4 @@
-# Topic Title
-
-
+# Factors
 
 ## Impetus
 
