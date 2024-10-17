@@ -1,28 +1,15 @@
 ---
-title: "In Class Activity"
-format: 
-  html:
-    code-tools: true
-    toc: false
+title: "Factor In Class Activity"
+format:  html
 ---
 
-## Examples
+Using the `forcats` library, take your `Rice Center Data` function and add these changes.
 
+1. Change the order of the weekdays to start with Monday.
+2. Add two additional factor columns:
+  - Weekday/Weekend based on the day of the week.
+  - Create a column based upon the *four primary lunar phases* for the data collected.
+3. [Superstar Question] Create a column that is a factor indicating if the tide is coming in (Incoming) or going out (Outgoing).
 
-This in-class file is used for demonstrating individual examples related to this topic and is kept as a persistent record of examples provided during lectures.
-
-## The Data
-
-
-## Vectors
-
-## Matrices
-
-## Lists
-
-## Data Frames
-
-
-
-
+Upload a markdown document that shows summaries of these changes in the Rice Rivers Center data set.
 

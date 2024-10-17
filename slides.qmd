@@ -236,415 +236,177 @@ data[3] <- "Bob"
 Part of the `tidyverse` group of packages.
 
 ```{r}
+library( tidyverse )
 library(forcats)
 ```
 
 This library has a lot of helper functions that make working with factors a bit easier.  I'm going to give you a few examples here but **strongly** encourage you to look a the cheat sheet for all the other options.
 
 
-## Counting Factors
+## StarWars API
+
+There is a StarWars API at [https://swapi.py4e.com](https://swapi.py4e.com), see `?starwars` to learn more about the data it contains.  Let's take this data to play with the {{< fa cat >}}{{< fa cat >}}{{< fa cat >}}{{< fa cat >}} library.
+
+&nbsp;
 
 ```{r}
-fct_count( data )
-```
-
-## Lumping Factors
-
-```{r}
-lumped <- fct_lump_min( data, min = 5)
-fct_count(  lumped )
-```
-
-## Reordering Factors
-
-We can reorder by *appearance order*, *observations*, or *numeric*
-
-*By Frequency*
-
-```{r}
-freq <- fct_infreq( data )
-levels( freq )
-```
-
-:::{.fragment}
-*By Order of Appearance*
-```{r}
-ordered <- fct_inorder( data )
-levels( ordered )
-```
-:::
-
-
-## Reorder Specific Levels
-
-```{r}
-newWeek <- fct_relevel( data, "Saturday", "Sunday")
-levels( newWeek )
+names(starwars)
 ```
 
 
-
-## Dropping Missing Levels
-
-
+## Homeworld as Factor {.smaller}
 
 ```{r}
-data <- sample( weekdays[1:5], size=40, replace=TRUE )
-data <- factor( data, ordered=TRUE, levels = weekdays )
-summary( data )
+starwars |>
+  filter( !is.na(homeworld), !is.na(mass) ) |>
+  mutate( homeworld = factor( homeworld ) ) -> df
+df$homeworld
 ```
 
-## Dropping Missing Levels
-
+## Homeworld as Ordered {.smaller}
 
 
 ```{r}
-fct_drop( data ) -> dropped
-summary( dropped )
+starwars |>
+  filter( !is.na(homeworld), !is.na(mass) ) |>
+  mutate( homeworld = factor( homeworld, ordered=TRUE ) ) -> df
+df$homeworld
 ```
 
-
-
-
-## Example `iris` Data {.smaller}
-
-:::: {.columns}
-
-::: {.column width="50%"}
-<center>![Ronald Aylmer Fisher<br/>1890 - 1962](https://live.staticflickr.com/65535/51479325426_ee1d73fc4b_o_d.jpg)</center>
-:::
-
-::: {.column width="50%"}
-British polymath, mathematician, statistican, geneticist, and academic.  Founded things such as:
-
- - Fundamental Theorem of Natural Selection,
- - The `F` test,
- - The `Exact` test,
- - Linear Discriminant Analysis,
- - Inverse probability
- - Intra-class correlations
- - Sexy son hypothesis.... 🥰
-:::
-
-::::
-
-
-
-## 
+## Visualizing Counts of Levels {.smaller}
 
 ```{r}
-head( iris, )
-summary( iris )
+df |> 
+  ggplot( aes(x=homeworld) ) + 
+  geom_bar() + 
+  coord_flip()
 ```
 
 
-## Operating on Factor Levels
-
-*Question:* What is the mean and variance in sepal length for each of the *Iris* species?
-
-:::{.fragment}
-The `by()` function allows us to perform some *function* on *data* based upon a grouping *index*.
-:::
-
-:::{.fragment}
-```{r}
-#| eval: false
-by( data, index, function )
-```
-:::
-
-
-## `by()`
-
-Here we can apply the function `mean()` to the data on sepal length using the species factor as a category.
+## Occurrence Based Order In `data.frame` {.smaller}
 
 ```{r}
-by( iris$Sepal.Length, iris$Species, mean)
+df |> 
+  mutate( homeworld = fct_inorder( homeworld ) ) |> 
+  ggplot( aes(x=homeworld) ) + 
+  geom_bar() + 
+  coord_flip()
 ```
 
-
-## `by()`
-
-The same for estimating variance
-
-```{r}
-by( iris$Sepal.Length, iris$Species, var)
-```
-
-
-## Missing Data
-
-Missing data is a *fact of life* and `R` is very opinionated about how it handles missing values.  Where this becomes tricky is when we are doing operations on data that has missing values.  `R` could take two routes:  
-
-1. It could ignore the data and give you the answer directly as if the data were not missing, or  
-2. It could let you know that there is missing data and make you do something about it.
-
-Fortunately, `R` took the second route.
-
-## Example
-
-```{r}
-df <- iris[, 4:5]
-df$Petal.Width[ c(2,6,12) ] <- NA
-summary( df )
-```
-
-## Screaming About NA
-
-If there is ONE `NA`, then most mathematical operaitons will not give you an answer.
+## Reordering By Other Valiable {.smaller}
 
 
 ```{r}
-mean( df$Petal.Width )
-```
-
-:::{.fragment}
-To tell `R` that you are both *aware* and *ok* with the estimation of a mean value in the presence of missing data, you will have to change an optional argument passed to the function.
-
-```{r}
-mean( df$Petal.Width, na.rm = TRUE)
-```
-
-:::
-
-
-## Adding Optionals to `by()`
-
-You'll have to do the same thing when using `by()`
-
-```{r}
-by( df$Petal.Width, df$Species, mean, na.rm=TRUE )
-```
-
-
-# Workflows & Pipes {background-color="black" background-image="media/contour.png" background-size="initial" background-position="right"}
-
-
-## Hypothetical Workflow
-
-A common workflow consists of taking some data and performing several operations on it before we do some kind of analysis, summary, plot, or table.  It can be 
-
-```{r}
-#| eval: false
-data <- read_csv( file )
-function( data ) -> data1
-data2 <- func2( data1 )
-data3 <- func3( data2 )
-data4 <- func4( data3 )
-```
-
-:::{.fragment}
-This causes a lot of data duplication of the intermediate steps, extra typing, etc.  *Remember we strive for minimal effort!*
-:::
-
-
-## &nbsp;
-
-![The Treachery of Images](https://upload.wikimedia.org/wikipedia/en/b/b9/MagrittePipe.jpg)
-
-
-## The Pipe Operator
-
-In `R` we use this grammar.
-
-```{r}
-#| eval: false
-data %>% Y()
-```
-
-To take the values in `data` and pass them **as if you entered the data as the first argument** to the function `Y()`.
-
-:::{.fragment}
-These pipes can be chained together into a single operation.
-```{r}
-#| eval: false
-data %>%
-  func1() %>%
-  func2() %>%
-  func3() -> newData
-```
-:::
-
-## Tidyverse
-
-The `maggitr` library is part of the `tidyverse` group of packages, so it is always easier to just load in `tidy`
-
-```{r}
-#| error: false
-#| warning: false 
-library( tidyverse )
-```
-
-## Example
-
-Here is an operation that we've used as `summary( iris )` in the past, but it can be used in a pipe like this.
-
-```{r}
-iris %>% summary() 
-```
-
-
-# Tables <br/> <font size="6">`knitr + table -> kable`</font> {background-color="black" background-image="media/contour.png" background-size="initial" background-position="right"}
-
-
-## Let's Make a Table!
-
-The `knitr` library has some nice basic functionality to make tables.
-
-```{r}
-#| eval: true
-library( knitr )
-```
-
-
-## Make Summary Data Frame
-
-The table should have the species names and the averages length and width of sepals.
-
-Make a new data frame and set the First Column as species.
-
-```{r}
-df <- data.frame( Species = levels( iris$Species ) )
-df
-```
-
-
-## Make Summary Data Frame
-
-Use the `by()` function to estimate mean length and width
-
-```{r}
-df$Length <- by( iris$Sepal.Length, iris$Species, mean )
-df$Width <- by( iris$Sepal.Width, iris$Species, mean )
-df
+df |> 
+  mutate( homeworld = fct_reorder( homeworld, mass )) |> 
+  ggplot( aes(x=homeworld) ) + 
+  geom_bar() + 
+  coord_flip()
 ```
 
 
 
 
-
-## Making A Table
-
-So, now we'll use our new pipe operator to pass the data into the `kable()` fuction (n.b., look at `?kable` and see that the first argument is the data, which is being substituted by the pipe). 
+## Frequency Based Ordering {.smaller}
 
 ```{r}
-df %>%
-  kable() 
+df |> 
+  mutate( homeworld = fct_infreq( homeworld ) ) |> 
+  ggplot( aes(x=homeworld) ) + 
+  geom_bar() + 
+  coord_flip()
+```
+
+## Reversing Orders {.smaller}
+
+```{r}
+df |> 
+  mutate( homeworld = fct_rev( fct_infreq( homeworld ) ) ) |> 
+  ggplot( aes(x=homeworld) ) + 
+  geom_bar() + 
+  coord_flip()
+```
+
+## Recoding Factors {.smaller}
+
+*New Value* = *Old Value*
+
+```{r}
+starwars |> 
+  filter( !is.na(homeworld) ) |>
+  mutate( homeworld = fct_recode(homeworld, 
+                                 "Homeworld of Zolander" = "Zolan",
+                                 "Outter Rim Territory Tund" = "Tund"
+  ) ) |>
+  ggplot( aes(x=homeworld) ) + 
+  geom_bar() + 
+  coord_flip()
 ```
 
 
-## Table captions
+## Collapsing A Few Selected Levels {.smaller}
 
 ```{r}
-df %>%
-  kable( caption = "Sepal size for three species of Fisher's iris data.")
+starwars |>
+  filter( !is.na(homeworld) ) |>
+  mutate( homeworld = fct_collapse( homeworld, 
+                                    "<---- MEH ---->" = c("Bestine IV","Cerea", "Dorin","Miral", "Sullust"),
+                                    "¯\\_(ツ)_/¯" = c("Umbara","Kashyyyk","Concord Dawn"),
+                                    "YES YES YES YES YSE YSE " = c("Nal Hutta","Ojom","Rodia","Ryloth","Serenno","Shili","Skako","Socorro")
+  )) |>
+  ggplot( aes(x=homeworld) ) + 
+  geom_bar() + 
+  coord_flip()
 ```
 
 
-
-## Making More Fancy Tables
-
-The library `kableExtras` has a lot more functionality that can be added to the table.
+## Lumping Based On Counts {.smaller}
 
 ```{r}
-library( kableExtra )
+starwars |> 
+  filter( !is.na(homeworld) ) |>
+  mutate( homeworld = fct_lump_min(homeworld, 2)) |>
+  ggplot( aes(x=homeworld) ) + 
+  geom_bar() + 
+  coord_flip()
 ```
 
-
-## Table Themes
-
-```{r}
-df %>%
-  kable() %>%
-  kable_paper()
-```
-
-## Table Themes
+## Lumping into N Groups {.smaller}
 
 ```{r}
-df %>%
-  kable() %>%
-  kable_classic()
-```
-
-## Table Themes
-
-```{r}
-df %>%
-  kable() %>%
-  kable_classic_2()
-```
-
-## Table Themes
-
-```{r}
-df %>%
-  kable() %>%
-  kable_minimal()
-```
-
-## Table Themes
-
-```{r}
-df %>%
-  kable() %>%
-  kable_material()
-```
-
-## Table Themes
-
-```{r}
-df %>%
-  kable() %>%
-  kable_material_dark()
-```
-
-## Table Sizes
-
-```{r}
-df %>%
-  kable() %>%
-  kable_paper( full_width=FALSE)
+starwars |>
+  filter( !is.na(homeworld) ) |>
+  mutate( homeworld = fct_lump_n(homeworld, n=5)) |>
+  ggplot( aes(x=homeworld) ) + 
+  geom_bar() + 
+  coord_flip()
 ```
 
 
 
-## Table Positions
+## Counting Factors & Occurances
 
 ```{r}
-df %>%
-  kable() %>%
-  kable_paper( full_width=FALSE, position="right")
+starwars |> 
+  filter( !is.na(homeworld) ) |> 
+  group_by( homeworld ) |> 
+  summarize( film = length(unique(films) ) ) |> 
+  arrange( -film )
 ```
 
-## `position = "float_right"` {.smaller .scrollable}
 
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut blandit libero sit amet porta elementum. In imperdiet tellus non odio porttitor auctor ac sit amet diam. Suspendisse eleifend vel nisi nec efficitur. Ut varius urna lectus, ac iaculis velit bibendum eget. Curabitur dignissim magna eu odio sagittis blandit. 
+## Anonymizing Factor Levels
+
 
 ```{r}
-#| echo: false
-df %>%
-  kable() %>%
-  kable_paper( full_width=FALSE, position = "float_right")
+starwars |>
+  filter( !is.na(homeworld) ) |> 
+  mutate( homeworld = fct_anon( fct_lump( homeworld, n=6 ) ) ) |>
+  ggplot( aes(x=homeworld) ) + 
+  geom_bar() + 
+  coord_flip()
 ```
-
-Vivamus sed ipsum mi. Etiam est leo, mollis ultrices dolor eget, consectetur euismod augue. In hac habitasse platea dictumst. Integer blandit ante magna, quis volutpat velit varius hendrerit. Vestibulum sit amet lacinia magna. Sed at varius nisl. Donec eu porta tellus, vitae rhoncus velit.
-
-
-# {background-color="black" background-image="https://live.staticflickr.com/65535/51478614622_7b6fd7fe08_c_d.jpg" background-size="contain" background-position="center"}
-
-
-
-## Fancier Grouped Headers
-
-```{r}
-df %>% 
-  kable() %>% 
-  kable_paper( full_width=FALSE) %>%
-  add_header_above( c(" "=1, "Size (cm)" = 2))
-```
-
 
 
 ## Questions
