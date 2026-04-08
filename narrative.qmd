@@ -385,8 +385,3 @@ We can do some really cool stuff on row and column headings.  Here is an example
 classic <- kable_paper( irisTable )
 add_header_above( classic, c(" " = 1, "Sepal Length (cm)" = 2))
 ```
-
-
-## Questions
-
-If you have any questions for me specifically on this topic, please post as an Issue in your repository, otherwise consider posting to the discussion board on [Canvas](https://canvas.vcu.edu).
