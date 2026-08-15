@@ -2,7 +2,7 @@
 
 ## Impetus
 
-The `factor` data type allows us to define categories on our data for grouping observations and measurements into either mutulally exclusive groups (e.g., populations, rivers, species) or into groupings that have some kind of underlying ordination meaning they are configured such that the `>` or `<` operator makes sense (e.g., Monday < Tuesday, # of fertilizer, etc.). 
+The `factor` data type allows us to define categories on our data for grouping observations and measurements into either mutually exclusive groups (e.g., populations, rivers, species) or into groupings that have some kind of underlying ordination meaning they are configured such that the `>` or `<` operator makes sense (e.g., Monday < Tuesday, # of fertilizer, etc.). 
 
 ## Student Learning Objectives
 

@@ -6,10 +6,10 @@
 <script src="slides_files/libs/quarto-html/tippy.umd.min.js"></script>
 <link href="slides_files/libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="slides_files/libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="slides_files/libs/quarto-html/quarto-syntax-highlighting-845c23b38eaddc0f92fda52bfe77a8c8.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="slides_files/libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <link href="slides_files/libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
 <link href="slides_files/libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.9.36">
+  <meta name="generator" content="quarto-1.9.37">
 
   <meta name="author" content="Rodney Dyer, PhD">
   <title>Factors</title>
@@ -262,7 +262,7 @@ Rodney Dyer, PhD
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href=""></a>chooseOne <span class="ot">&lt;-</span> <span class="fu">sample</span>( <span class="fu">c</span>(<span class="st">"Heads"</span>,<span class="st">"Tails"</span>), <span class="at">size=</span><span class="dv">1</span> )</span>
 <span id="cb5-2"><a href=""></a>chooseOne</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "Tails"</code></pre>
+<pre><code>[1] "Heads"</code></pre>
 </div>
 </div>
 </section>
@@ -272,7 +272,7 @@ Rodney Dyer, PhD
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href=""></a><span class="fu">sample</span>( <span class="fu">c</span>(<span class="st">"Heads"</span>,<span class="st">"Tails"</span>), <span class="at">size=</span><span class="dv">10</span>, <span class="at">replace=</span><span class="cn">TRUE</span> )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> [1] "Heads" "Tails" "Heads" "Heads" "Heads" "Heads" "Tails" "Tails" "Tails"
+<pre><code> [1] "Heads" "Tails" "Heads" "Tails" "Tails" "Heads" "Tails" "Heads" "Tails"
 [10] "Heads"</code></pre>
 </div>
 </div>
@@ -284,18 +284,18 @@ Rodney Dyer, PhD
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href=""></a>days <span class="ot">&lt;-</span> <span class="fu">sample</span>( weekdays, <span class="at">size=</span><span class="dv">40</span>, <span class="at">replace=</span><span class="cn">TRUE</span>)</span>
 <span id="cb9-2"><a href=""></a><span class="fu">summary</span>( days )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>   Length     Class      Mode 
-       40 character character </code></pre>
+<pre><code>   Length  N.unique   N.blank Min.nchar Max.nchar 
+       40         7         0         6         9 </code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href=""></a>days</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> [1] "Thursday"  "Sunday"    "Thursday"  "Monday"    "Sunday"    "Thursday" 
- [7] "Wednesday" "Thursday"  "Thursday"  "Thursday"  "Thursday"  "Monday"   
-[13] "Tuesday"   "Tuesday"   "Friday"    "Wednesday" "Friday"    "Sunday"   
-[19] "Monday"    "Saturday"  "Monday"    "Monday"    "Monday"    "Thursday" 
-[25] "Thursday"  "Sunday"    "Tuesday"   "Friday"    "Saturday"  "Tuesday"  
-[31] "Thursday"  "Sunday"    "Sunday"    "Monday"    "Sunday"    "Friday"   
-[37] "Monday"    "Monday"    "Friday"    "Saturday" </code></pre>
+<pre><code> [1] "Sunday"    "Friday"    "Sunday"    "Sunday"    "Tuesday"   "Sunday"   
+ [7] "Tuesday"   "Thursday"  "Tuesday"   "Saturday"  "Tuesday"   "Wednesday"
+[13] "Monday"    "Wednesday" "Thursday"  "Thursday"  "Wednesday" "Friday"   
+[19] "Tuesday"   "Monday"    "Saturday"  "Thursday"  "Thursday"  "Sunday"   
+[25] "Tuesday"   "Wednesday" "Monday"    "Monday"    "Friday"    "Thursday" 
+[31] "Saturday"  "Friday"    "Friday"    "Tuesday"   "Saturday"  "Sunday"   
+[37] "Friday"    "Sunday"    "Saturday"  "Sunday"   </code></pre>
 </div>
 </div>
 </section>
@@ -318,12 +318,12 @@ Rodney Dyer, PhD
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href=""></a>data</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> [1] Thursday  Sunday    Thursday  Monday    Sunday    Thursday  Wednesday
- [8] Thursday  Thursday  Thursday  Thursday  Monday    Tuesday   Tuesday  
-[15] Friday    Wednesday Friday    Sunday    Monday    Saturday  Monday   
-[22] Monday    Monday    Thursday  Thursday  Sunday    Tuesday   Friday   
-[29] Saturday  Tuesday   Thursday  Sunday    Sunday    Monday    Sunday   
-[36] Friday    Monday    Monday    Friday    Saturday 
+<pre><code> [1] Sunday    Friday    Sunday    Sunday    Tuesday   Sunday    Tuesday  
+ [8] Thursday  Tuesday   Saturday  Tuesday   Wednesday Monday    Wednesday
+[15] Thursday  Thursday  Wednesday Friday    Tuesday   Monday    Saturday 
+[22] Thursday  Thursday  Sunday    Tuesday   Wednesday Monday    Monday   
+[29] Friday    Thursday  Saturday  Friday    Friday    Tuesday   Saturday 
+[36] Sunday    Friday    Sunday    Saturday  Sunday   
 Levels: Friday Monday Saturday Sunday Thursday Tuesday Wednesday</code></pre>
 </div>
 </div>
@@ -401,12 +401,12 @@ Levels: Friday Monday Saturday Sunday Thursday Tuesday Wednesday</code></pre>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href=""></a>data</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> [1] Thursday  Sunday    Thursday  Monday    Sunday    Thursday  Wednesday
- [8] Thursday  Thursday  Thursday  Thursday  Monday    Tuesday   Tuesday  
-[15] Friday    Wednesday Friday    Sunday    Monday    Saturday  Monday   
-[22] Monday    Monday    Thursday  Thursday  Sunday    Tuesday   Friday   
-[29] Saturday  Tuesday   Thursday  Sunday    Sunday    Monday    Sunday   
-[36] Friday    Monday    Monday    Friday    Saturday 
+<pre><code> [1] Sunday    Friday    Sunday    Sunday    Tuesday   Sunday    Tuesday  
+ [8] Thursday  Tuesday   Saturday  Tuesday   Wednesday Monday    Wednesday
+[15] Thursday  Thursday  Wednesday Friday    Tuesday   Monday    Saturday 
+[22] Thursday  Thursday  Sunday    Tuesday   Wednesday Monday    Monday   
+[29] Friday    Thursday  Saturday  Friday    Friday    Tuesday   Saturday 
+[36] Sunday    Friday    Sunday    Saturday  Sunday   
 7 Levels: Friday &lt; Monday &lt; Saturday &lt; Sunday &lt; Thursday &lt; ... &lt; Wednesday</code></pre>
 </div>
 </div>
@@ -420,12 +420,12 @@ Levels: Friday Monday Saturday Sunday Thursday Tuesday Wednesday</code></pre>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href=""></a>data <span class="ot">&lt;-</span> <span class="fu">factor</span>( days, <span class="at">ordered =</span> <span class="cn">TRUE</span>, <span class="at">levels =</span> weekdays)</span>
 <span id="cb30-2"><a href=""></a>data</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> [1] Thursday  Sunday    Thursday  Monday    Sunday    Thursday  Wednesday
- [8] Thursday  Thursday  Thursday  Thursday  Monday    Tuesday   Tuesday  
-[15] Friday    Wednesday Friday    Sunday    Monday    Saturday  Monday   
-[22] Monday    Monday    Thursday  Thursday  Sunday    Tuesday   Friday   
-[29] Saturday  Tuesday   Thursday  Sunday    Sunday    Monday    Sunday   
-[36] Friday    Monday    Monday    Friday    Saturday 
+<pre><code> [1] Sunday    Friday    Sunday    Sunday    Tuesday   Sunday    Tuesday  
+ [8] Thursday  Tuesday   Saturday  Tuesday   Wednesday Monday    Wednesday
+[15] Thursday  Thursday  Wednesday Friday    Tuesday   Monday    Saturday 
+[22] Thursday  Thursday  Sunday    Tuesday   Wednesday Monday    Monday   
+[29] Friday    Thursday  Saturday  Friday    Friday    Tuesday   Saturday 
+[36] Sunday    Friday    Sunday    Saturday  Sunday   
 7 Levels: Monday &lt; Tuesday &lt; Wednesday &lt; Thursday &lt; Friday &lt; ... &lt; Sunday</code></pre>
 </div>
 </div>
@@ -440,11 +440,11 @@ Levels: Friday Monday Saturday Sunday Thursday Tuesday Wednesday</code></pre>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href=""></a><span class="fu">sort</span>( data )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> [1] Monday    Monday    Monday    Monday    Monday    Monday    Monday   
- [8] Monday    Monday    Tuesday   Tuesday   Tuesday   Tuesday   Wednesday
+<pre><code> [1] Monday    Monday    Monday    Monday    Tuesday   Tuesday   Tuesday  
+ [8] Tuesday   Tuesday   Tuesday   Tuesday   Wednesday Wednesday Wednesday
 [15] Wednesday Thursday  Thursday  Thursday  Thursday  Thursday  Thursday 
-[22] Thursday  Thursday  Thursday  Thursday  Friday    Friday    Friday   
-[29] Friday    Friday    Saturday  Saturday  Saturday  Sunday    Sunday   
+[22] Friday    Friday    Friday    Friday    Friday    Friday    Saturday 
+[29] Saturday  Saturday  Saturday  Saturday  Sunday    Sunday    Sunday   
 [36] Sunday    Sunday    Sunday    Sunday    Sunday   
 7 Levels: Monday &lt; Tuesday &lt; Wednesday &lt; Thursday &lt; Friday &lt; ... &lt; Sunday</code></pre>
 </div>

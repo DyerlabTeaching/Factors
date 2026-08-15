@@ -6,7 +6,7 @@
 
 
 
-> Factors allow us to represent a type of data that exclusive and categorical.  These data may, or may not, be ordered and in most cases, we can think of these kinds of data to represent things like, treatment levels, sampling locations, etc.
+> Factors allow us to represent a type of data that is exclusive and categorical.  These data may, or may not, be ordered and in most cases, we can think of these kinds of data to represent things like, treatment levels, sampling locations, etc.
 
 ## Factors
 
@@ -26,7 +26,7 @@ I'm going to take these days and random sample them to create a vector of 40 ele
 data <- sample( weekdays, size=40, replace=TRUE)
 data
 ```
-These data are still 
+<mark>These data are still</mark>
 
 ```{r}
 class( data )
@@ -47,14 +47,14 @@ days
 summary( days )
 ```
 
-We can put them into data frames and they know how to summarize themselves properly by counting the number of occurances of each level.
+We can put them into data frames and they know how to summarize themselves properly by counting the number of occurrences of each level.
 
 ```{r}
 df <- data.frame( ID = 1:40, Weekdays = days )
 summary( df )
 ```
 
-And we can directly access the unique levels 
+And we can directly access the unique levels.
 
 ```{r}
 levels( days )
@@ -99,7 +99,7 @@ sort( data )
 
 ### Exclusivity of Factor Levels
 
-Once you establish a factor, you cannot set the values to anyting that is outside of the pre-defined levels.  If you do, it will just put in missing data `NA`.
+Once you establish a factor, you cannot set the values to anything that is outside of the pre-defined levels.  If you do, it will just put in missing data `NA`.
 
 ```{r}
 days[3] <- "Bob"
@@ -113,7 +113,7 @@ workdays <- sample( weekdays[1:5], size=40, replace = TRUE )
 workdays <- factor( workdays, ordered=TRUE, levels = weekdays )
 ```
 
-And when we summarize it, we see that while it is possible that days may be named `Saturday` and `Sunday`, they are not recoreded in the data we have for workdays.
+And when we summarize it, we see that while it is possible that days may be named `Saturday` and `Sunday`, they are not recorded in the data we have for workdays.
 
 ```{r}
 summary( workdays )
@@ -131,7 +131,7 @@ summary( workdays )
 
 ## The `forcats` Library
 
-The `forcats` library has a bunch of helper functions for working with factors.  This is a relatively small library in `tidyverse` but a powerful one.  I would recommend looking at the [cheatsheet]() for it to get a more broad understanding of what functions in this library can do.
+The `forcats` library has a bunch of helper functions for working with factors.  This is a relatively small library in `tidyverse` but a powerful one.  I would recommend looking at the <mark>[cheatsheet]()</mark> for it to get a more broad understanding of what functions in this library can do.
 
 ```{r}
 library( forcats )
@@ -188,7 +188,7 @@ summary( dropped )
 
 ## Using Factors 
 
-It is common to use factors as an organizing princple in our data.  For example, let's say we went out and sampled three different species of plants and measured characteristics of their flower size.  The `iris` data set from R.A. Fisher is a classid data set that is include in `R` and it looks like this (the functions `head()` and `tail()` show the top or bottom parts of a data frame).
+It is common to use factors as an organizing principle in our data.  For example, let's say we went out and sampled three different species of plants and measured characteristics of their flower size.  The `iris` data set from R.A. Fisher is a classic data set that is included in `R` and it looks like this (the functions `head()` and `tail()` show the top or bottom parts of a data frame).
 
 ```{r}
 head(iris)
@@ -210,7 +210,7 @@ by( data, index, function)
 
 The `data` is the raw data you are using, the `index` is a vector that we are using to differentiate among the species (the factor), and the function is what function we want to use.
 
-So for example, if I were interesed in the mean length of the Sepal for each species, I could write.
+So for example, if I were interested in the mean length of the Sepal for each species, I could write.
 
 ```{r}
 meanSepalLength <- by( iris$Sepal.Length, iris$Species, mean )
@@ -240,7 +240,7 @@ df
 ## Missing Data 
 
 
-Missing data is a .red[fact of life] and `R` is very opinionated about how it handles missing values.  In general, missing data is encoded as `NA` and is a valid entry for any data type (character, numeric, logical, factor, etc.).  Where this becomes tricky is when we are doing operations on data that has missing values.  `R` could take two routes:  
+Missing data is a [fact of life]{.red} and `R` is very opinionated about how it handles missing values.  In general, missing data is encoded as `NA` and is a valid entry for any data type (character, numeric, logical, factor, etc.).  Where this becomes tricky is when we are doing operations on data that has missing values.  `R` could take two routes:  
 
 1. It could ignore the data and give you the answer directly as if the data were not missing, or  
 2. It could let you know that there is missing data and make you do something about it.
@@ -266,7 +266,7 @@ When we perform a mathematical or statistical operation on data that has missing
 mean( missingIris$Petal.Width )
 ```
 
-This warns you that .red[at least one] of the observations in the data is missing.
+This warns you that [at least one]{.red} of the observations in the data is missing.
 
 Same output for using `by()`, it will put `NA` into each level that has at least one missing value.
 
@@ -314,7 +314,7 @@ irisTable
 ```
 
 
-In addition to this basic library, there is an `kableExtra` one that allows us to get even more fancy.  You must go check out [this](https://cran.r-project.org/web/packages/kableExtra/vignettes/awesome_table_in_html.html) webpage (which is an RMarkdown page by the way) to see all the other ways you can fancy up your tables.
+In addition to this basic library, there is a `kableExtra` one that allows us to get even more fancy.  You must go check out [this](https://cran.r-project.org/web/packages/kableExtra/vignettes/awesome_table_in_html.html) webpage (which is an RMarkdown page by the way) to see all the other ways you can fancy up your tables.
 
 
 ```{r}
@@ -324,7 +324,7 @@ library( kableExtra )
 
 ### Table Themes 
 
-Here are some examples Themes
+Here are some examples of Themes
 
 ```{r}
 kable_paper( irisTable )
@@ -365,7 +365,7 @@ kable_paper(irisTable, full_width = FALSE )
 kable_paper( irisTable, full_width=FALSE, position="right")
 ```
 
-And even embed it in a bunch of text and float it to left or right (I added `echo=FALSE` to the chunck header so it hides itself).  
+And even embed it in a bunch of text and float it to left or right (I added `echo=FALSE` to the chunk header so it hides itself).  
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut blandit libero sit amet porta elementum. In imperdiet tellus non odio porttitor auctor ac sit amet diam. Suspendisse eleifend vel nisi nec efficitur. Ut varius urna lectus, ac iaculis velit bibendum eget. Curabitur dignissim magna eu odio sagittis blandit. Vivamus sed ipsum mi. Etiam est leo, mollis ultrices dolor eget, consectetur euismod augue. In hac habitasse platea dictumst. Integer blandit ante magna, quis volutpat velit varius hendrerit. Vestibulum sit amet lacinia magna. Sed at varius nisl. Donec eu porta tellus, vitae rhoncus velit.
 
