@@ -1,4 +1,7 @@
-# Factors
+---
+title: "Factors"
+format: html
+---
 
 ```{=html}
 <iframe src="https://dyerlabteaching.github.io/Factors/slides.html#/title-slide"></iframe>

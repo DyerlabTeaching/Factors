@@ -6,3 +6,34 @@ format: html
 > Daily updates on progress for the course in each section.
 
 
+## Copy-Edit Log — Factors
+
+Tracks copy-editing passes over this module's `.qmd` documents. Clear-cut
+typos/grammar/spelling errors are corrected directly in the source. Items
+that need an author decision are left in place but wrapped in
+`<mark>...</mark>` so they show up highlighted in the rendered HTML.
+
+### narrative.qmd — 2026-08-15
+
+#### Fixed directly (typos, spelling, grammar)
+
+| Line | Issue | Fix |
+|---|---|---|
+| 9 | "data that exclusive and categorical" (missing "is") | "data that is exclusive and categorical" |
+| 50 | "occurances" | "occurrences" |
+| 57 | missing terminal period | added |
+| 102 | "anyting" | "anything" |
+| 116 | "recoreded" | "recorded" |
+| 191 | "organizing princple" / "a classid data set" / "that is include in" | "organizing principle" / "a classic data set" / "that is included in" |
+| 213 | "if I were interesed" | "if I were interested" |
+| 243, 269 | `.red[...]` — this is xaringan/remark.js slide syntax, not valid in a Quarto HTML document; it was rendering as literal text instead of colored text | `[...]{.red}` (correct Pandoc bracketed-span syntax). Confirmed in the rendered HTML that this now emits `class="red"` spans. |
+| 317 | "there is an `kableExtra` one" | "there is a `kableExtra` one" |
+| 327 | "Here are some examples Themes" | "Here are some examples of Themes" |
+| 368 | "chunck header" | "chunk header" |
+
+#### Flagged for your review (highlighted with `<mark>` in the source)
+
+| Line | Text | Why it's flagged |
+|---|---|---|
+| ~29 | "These data are still" | Cuts off before the code block — the thought (still *what*?) was never finished. |
+| ~134 | `[cheatsheet]()` | The link text is there but the URL is empty, so the link goes nowhere. I don't know which cheatsheet you meant to link, so I left it for you to fill in rather than guess a URL. |
