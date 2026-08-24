@@ -272,7 +272,7 @@ Rodney Dyer, PhD
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href=""></a><span class="fu">sample</span>( <span class="fu">c</span>(<span class="st">"Heads"</span>,<span class="st">"Tails"</span>), <span class="at">size=</span><span class="dv">10</span>, <span class="at">replace=</span><span class="cn">TRUE</span> )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> [1] "Heads" "Heads" "Tails" "Tails" "Tails" "Tails" "Tails" "Tails" "Tails"
+<pre><code> [1] "Tails" "Heads" "Heads" "Tails" "Heads" "Tails" "Heads" "Heads" "Tails"
 [10] "Tails"</code></pre>
 </div>
 </div>
@@ -289,13 +289,13 @@ Rodney Dyer, PhD
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href=""></a>days</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> [1] "Saturday"  "Friday"    "Thursday"  "Tuesday"   "Saturday"  "Tuesday"  
- [7] "Saturday"  "Thursday"  "Tuesday"   "Sunday"    "Tuesday"   "Thursday" 
-[13] "Friday"    "Sunday"    "Friday"    "Friday"    "Friday"    "Thursday" 
-[19] "Friday"    "Monday"    "Tuesday"   "Monday"    "Sunday"    "Saturday" 
-[25] "Sunday"    "Wednesday" "Thursday"  "Sunday"    "Saturday"  "Monday"   
-[31] "Monday"    "Wednesday" "Saturday"  "Sunday"    "Sunday"    "Sunday"   
-[37] "Sunday"    "Thursday"  "Friday"    "Sunday"   </code></pre>
+<pre><code> [1] "Tuesday"   "Tuesday"   "Tuesday"   "Friday"    "Monday"    "Friday"   
+ [7] "Thursday"  "Monday"    "Thursday"  "Saturday"  "Wednesday" "Thursday" 
+[13] "Friday"    "Friday"    "Wednesday" "Monday"    "Thursday"  "Wednesday"
+[19] "Thursday"  "Friday"    "Wednesday" "Wednesday" "Friday"    "Saturday" 
+[25] "Saturday"  "Thursday"  "Monday"    "Thursday"  "Thursday"  "Monday"   
+[31] "Thursday"  "Sunday"    "Saturday"  "Sunday"    "Friday"    "Sunday"   
+[37] "Friday"    "Monday"    "Monday"    "Sunday"   </code></pre>
 </div>
 </div>
 </section>
@@ -318,12 +318,12 @@ Rodney Dyer, PhD
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href=""></a>data</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> [1] Saturday  Friday    Thursday  Tuesday   Saturday  Tuesday   Saturday 
- [8] Thursday  Tuesday   Sunday    Tuesday   Thursday  Friday    Sunday   
-[15] Friday    Friday    Friday    Thursday  Friday    Monday    Tuesday  
-[22] Monday    Sunday    Saturday  Sunday    Wednesday Thursday  Sunday   
-[29] Saturday  Monday    Monday    Wednesday Saturday  Sunday    Sunday   
-[36] Sunday    Sunday    Thursday  Friday    Sunday   
+<pre><code> [1] Tuesday   Tuesday   Tuesday   Friday    Monday    Friday    Thursday 
+ [8] Monday    Thursday  Saturday  Wednesday Thursday  Friday    Friday   
+[15] Wednesday Monday    Thursday  Wednesday Thursday  Friday    Wednesday
+[22] Wednesday Friday    Saturday  Saturday  Thursday  Monday    Thursday 
+[29] Thursday  Monday    Thursday  Sunday    Saturday  Sunday    Friday   
+[36] Sunday    Friday    Monday    Monday    Sunday   
 Levels: Friday Monday Saturday Sunday Thursday Tuesday Wednesday</code></pre>
 </div>
 </div>
@@ -401,12 +401,12 @@ Levels: Friday Monday Saturday Sunday Thursday Tuesday Wednesday</code></pre>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href=""></a>data</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> [1] Saturday  Friday    Thursday  Tuesday   Saturday  Tuesday   Saturday 
- [8] Thursday  Tuesday   Sunday    Tuesday   Thursday  Friday    Sunday   
-[15] Friday    Friday    Friday    Thursday  Friday    Monday    Tuesday  
-[22] Monday    Sunday    Saturday  Sunday    Wednesday Thursday  Sunday   
-[29] Saturday  Monday    Monday    Wednesday Saturday  Sunday    Sunday   
-[36] Sunday    Sunday    Thursday  Friday    Sunday   
+<pre><code> [1] Tuesday   Tuesday   Tuesday   Friday    Monday    Friday    Thursday 
+ [8] Monday    Thursday  Saturday  Wednesday Thursday  Friday    Friday   
+[15] Wednesday Monday    Thursday  Wednesday Thursday  Friday    Wednesday
+[22] Wednesday Friday    Saturday  Saturday  Thursday  Monday    Thursday 
+[29] Thursday  Monday    Thursday  Sunday    Saturday  Sunday    Friday   
+[36] Sunday    Friday    Monday    Monday    Sunday   
 7 Levels: Friday &lt; Monday &lt; Saturday &lt; Sunday &lt; Thursday &lt; ... &lt; Wednesday</code></pre>
 </div>
 </div>
@@ -420,12 +420,12 @@ Levels: Friday Monday Saturday Sunday Thursday Tuesday Wednesday</code></pre>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href=""></a>data <span class="ot">&lt;-</span> <span class="fu">factor</span>( days, <span class="at">ordered =</span> <span class="cn">TRUE</span>, <span class="at">levels =</span> weekdays)</span>
 <span id="cb30-2"><a href=""></a>data</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> [1] Saturday  Friday    Thursday  Tuesday   Saturday  Tuesday   Saturday 
- [8] Thursday  Tuesday   Sunday    Tuesday   Thursday  Friday    Sunday   
-[15] Friday    Friday    Friday    Thursday  Friday    Monday    Tuesday  
-[22] Monday    Sunday    Saturday  Sunday    Wednesday Thursday  Sunday   
-[29] Saturday  Monday    Monday    Wednesday Saturday  Sunday    Sunday   
-[36] Sunday    Sunday    Thursday  Friday    Sunday   
+<pre><code> [1] Tuesday   Tuesday   Tuesday   Friday    Monday    Friday    Thursday 
+ [8] Monday    Thursday  Saturday  Wednesday Thursday  Friday    Friday   
+[15] Wednesday Monday    Thursday  Wednesday Thursday  Friday    Wednesday
+[22] Wednesday Friday    Saturday  Saturday  Thursday  Monday    Thursday 
+[29] Thursday  Monday    Thursday  Sunday    Saturday  Sunday    Friday   
+[36] Sunday    Friday    Monday    Monday    Sunday   
 7 Levels: Monday &lt; Tuesday &lt; Wednesday &lt; Thursday &lt; Friday &lt; ... &lt; Sunday</code></pre>
 </div>
 </div>
@@ -440,12 +440,12 @@ Levels: Friday Monday Saturday Sunday Thursday Tuesday Wednesday</code></pre>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href=""></a><span class="fu">sort</span>( data )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> [1] Monday    Monday    Monday    Monday    Tuesday   Tuesday   Tuesday  
- [8] Tuesday   Tuesday   Wednesday Wednesday Thursday  Thursday  Thursday 
-[15] Thursday  Thursday  Thursday  Friday    Friday    Friday    Friday   
-[22] Friday    Friday    Friday    Saturday  Saturday  Saturday  Saturday 
-[29] Saturday  Saturday  Sunday    Sunday    Sunday    Sunday    Sunday   
-[36] Sunday    Sunday    Sunday    Sunday    Sunday   
+<pre><code> [1] Monday    Monday    Monday    Monday    Monday    Monday    Monday   
+ [8] Tuesday   Tuesday   Tuesday   Wednesday Wednesday Wednesday Wednesday
+[15] Wednesday Thursday  Thursday  Thursday  Thursday  Thursday  Thursday 
+[22] Thursday  Thursday  Thursday  Friday    Friday    Friday    Friday   
+[29] Friday    Friday    Friday    Friday    Saturday  Saturday  Saturday 
+[36] Saturday  Sunday    Sunday    Sunday    Sunday   
 7 Levels: Monday &lt; Tuesday &lt; Wednesday &lt; Thursday &lt; Friday &lt; ... &lt; Sunday</code></pre>
 </div>
 </div>
