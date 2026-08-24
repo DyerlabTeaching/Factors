@@ -30,6 +30,14 @@ The `factor` data type allows us to define categories on our data for grouping o
 - A longer [Narrative](https://dyerlabteaching.github.io/Factors/narrative.html) of the topic content.
 - [In Class](https://dyerlabteaching.github.io/Factors/in-class.html) notes taken during the introduction of factors in class.
 
+## Assessment
+
+- A [homework](https://dyerlabteaching.github.io/Factors/homework.html) assignment on the topic.
+
+## Logistics
+
+- A [Teaching Log](https://dyerlabteaching.github.io/Factors/log.html) record of delivery and notes.
+
 ## Contact Information
 
 If you need to contact me, I am available at:
