@@ -1,6 +1,6 @@
 ---
 title: "Factor In Class Activity"
-format:  html
+format: html
 ---
 
 Using the `forcats` library, take your `Rice Center Data` function and add these changes.
