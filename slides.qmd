@@ -5,6 +5,10 @@ author: Rodney Dyer, PhD
 format: revealjs
 execute:
   echo: true
+title-slide-attributes: 
+  data-background-image: "media/contour.png"
+  data-background-position: "right"
+  data-background-size: initial
 ---
 
 ## Topics Covered
@@ -37,10 +41,16 @@ Unique and individual grouping that can be applied to a study design.
 
 :::{.column width="50%"}
 ```{r}
-weekdays <- c("Monday","Tuesday","Wednesday",
-              "Thursday","Friday","Saturday", 
-              "Sunday")
-class( weekdays )
+weekdays <- c(
+  "Monday",
+  "Tuesday",
+  "Wednesday",
+  "Thursday",
+  "Friday",
+  "Saturday",
+  "Sunday"
+)
+class(weekdays)
 weekdays
 ```
 :::
@@ -57,7 +67,7 @@ The function `sample()` allows us to take a random sample of elements from a vec
 
 
 ```{r}
-chooseOne <- sample( c("Heads","Tails"), size=1 )
+chooseOne <- sample(c("Heads", "Tails"), size = 1)
 chooseOne
 ```
 
@@ -67,7 +77,7 @@ chooseOne
 However, if we want a large number items, we can have them with or without replacement.
 
 ```{r}
-sample( c("Heads","Tails"), size=10, replace=TRUE )
+sample(c("Heads", "Tails"), size = 10, replace = TRUE)
 ```
 
 
@@ -78,8 +88,8 @@ sample( c("Heads","Tails"), size=10, replace=TRUE )
 We'll pretend we have a bunch of data related to the day of the week.
 
 ```{r}
-days <- sample( weekdays, size=40, replace=TRUE)
-summary( days )
+days <- sample(weekdays, size = 40, replace = TRUE)
+summary(days)
 days
 ```
 
@@ -88,9 +98,9 @@ days
 ## Turn it into a `factor`
 
 ```{r}
-data <- factor( days )
-is.factor( data )
-class( data )
+data <- factor(days)
+is.factor(data)
+class(data)
 ```
 
 
@@ -108,7 +118,7 @@ data
 Each factor variable is defined by the `levels` that constitute the data.  This is a .red[finite] set of unique values
 
 ```{r}
-levels( data)
+levels(data)
 ```
 
 
@@ -130,7 +140,7 @@ data[1] < data[2]
 ## Ordination = Ordered
 
 ```{r}
-is.ordered( data )
+is.ordered(data)
 ```
 
 
@@ -170,8 +180,8 @@ Where ordination is irrelevant:
 
 
 ```{r}
-data <- factor( days, ordered = TRUE)
-is.ordered( data )
+data <- factor(days, ordered = TRUE)
+is.ordered(data)
 ```
 
 
@@ -193,7 +203,7 @@ Specifying the Order of Ordinal Factors
 
 
 ```{r}
-data <- factor( days, ordered = TRUE, levels = weekdays)
+data <- factor(days, ordered = TRUE, levels = weekdays)
 data
 ```
 
@@ -206,7 +216,7 @@ data
 ## Sorting Is Now Relevant
 
 ```{r}
-sort( data )
+sort(data)
 ```
 
 
@@ -236,7 +246,7 @@ data[3] <- "Bob"
 Part of the `tidyverse` group of packages.
 
 ```{r}
-library( tidyverse )
+library(tidyverse)
 library(forcats)
 ```
 
@@ -258,8 +268,8 @@ names(starwars)
 
 ```{r}
 starwars |>
-  filter( !is.na(homeworld), !is.na(mass) ) |>
-  mutate( homeworld = factor( homeworld ) ) -> df
+  filter(!is.na(homeworld), !is.na(mass)) |>
+  mutate(homeworld = factor(homeworld)) -> df
 df$homeworld
 ```
 
@@ -268,17 +278,17 @@ df$homeworld
 
 ```{r}
 starwars |>
-  filter( !is.na(homeworld), !is.na(mass) ) |>
-  mutate( homeworld = factor( homeworld, ordered=TRUE ) ) -> df
+  filter(!is.na(homeworld), !is.na(mass)) |>
+  mutate(homeworld = factor(homeworld, ordered = TRUE)) -> df
 df$homeworld
 ```
 
 ## Visualizing Counts of Levels {.smaller}
 
 ```{r}
-df |> 
-  ggplot( aes(x=homeworld) ) + 
-  geom_bar() + 
+df |>
+  ggplot(aes(x = homeworld)) +
+  geom_bar() +
   coord_flip()
 ```
 
@@ -286,10 +296,10 @@ df |>
 ## Occurrence Based Order In `data.frame` {.smaller}
 
 ```{r}
-df |> 
-  mutate( homeworld = fct_inorder( homeworld ) ) |> 
-  ggplot( aes(x=homeworld) ) + 
-  geom_bar() + 
+df |>
+  mutate(homeworld = fct_inorder(homeworld)) |>
+  ggplot(aes(x = homeworld)) +
+  geom_bar() +
   coord_flip()
 ```
 
@@ -297,10 +307,10 @@ df |>
 
 
 ```{r}
-df |> 
-  mutate( homeworld = fct_reorder( homeworld, mass )) |> 
-  ggplot( aes(x=homeworld) ) + 
-  geom_bar() + 
+df |>
+  mutate(homeworld = fct_reorder(homeworld, mass)) |>
+  ggplot(aes(x = homeworld)) +
+  geom_bar() +
   coord_flip()
 ```
 
@@ -310,20 +320,20 @@ df |>
 ## Frequency Based Ordering {.smaller}
 
 ```{r}
-df |> 
-  mutate( homeworld = fct_infreq( homeworld ) ) |> 
-  ggplot( aes(x=homeworld) ) + 
-  geom_bar() + 
+df |>
+  mutate(homeworld = fct_infreq(homeworld)) |>
+  ggplot(aes(x = homeworld)) +
+  geom_bar() +
   coord_flip()
 ```
 
 ## Reversing Orders {.smaller}
 
 ```{r}
-df |> 
-  mutate( homeworld = fct_rev( fct_infreq( homeworld ) ) ) |> 
-  ggplot( aes(x=homeworld) ) + 
-  geom_bar() + 
+df |>
+  mutate(homeworld = fct_rev(fct_infreq(homeworld))) |>
+  ggplot(aes(x = homeworld)) +
+  geom_bar() +
   coord_flip()
 ```
 
@@ -332,14 +342,17 @@ df |>
 *New Value* = *Old Value*
 
 ```{r}
-starwars |> 
-  filter( !is.na(homeworld) ) |>
-  mutate( homeworld = fct_recode(homeworld, 
-                                 "Homeworld of Zolander" = "Zolan",
-                                 "Outter Rim Territory Tund" = "Tund"
-  ) ) |>
-  ggplot( aes(x=homeworld) ) + 
-  geom_bar() + 
+starwars |>
+  filter(!is.na(homeworld)) |>
+  mutate(
+    homeworld = fct_recode(
+      homeworld,
+      "Homeworld of Zolander" = "Zolan",
+      "Outter Rim Territory Tund" = "Tund"
+    )
+  ) |>
+  ggplot(aes(x = homeworld)) +
+  geom_bar() +
   coord_flip()
 ```
 
@@ -348,14 +361,26 @@ starwars |>
 
 ```{r}
 starwars |>
-  filter( !is.na(homeworld) ) |>
-  mutate( homeworld = fct_collapse( homeworld, 
-                                    "<---- MEH ---->" = c("Bestine IV","Cerea", "Dorin","Miral", "Sullust"),
-                                    "¯\\_(ツ)_/¯" = c("Umbara","Kashyyyk","Concord Dawn"),
-                                    "YES YES YES YES YSE YSE " = c("Nal Hutta","Ojom","Rodia","Ryloth","Serenno","Shili","Skako","Socorro")
-  )) |>
-  ggplot( aes(x=homeworld) ) + 
-  geom_bar() + 
+  filter(!is.na(homeworld)) |>
+  mutate(
+    homeworld = fct_collapse(
+      homeworld,
+      "<---- MEH ---->" = c("Bestine IV", "Cerea", "Dorin", "Miral", "Sullust"),
+      "¯\\_(ツ)_/¯" = c("Umbara", "Kashyyyk", "Concord Dawn"),
+      "YES YES YES YES YSE YSE " = c(
+        "Nal Hutta",
+        "Ojom",
+        "Rodia",
+        "Ryloth",
+        "Serenno",
+        "Shili",
+        "Skako",
+        "Socorro"
+      )
+    )
+  ) |>
+  ggplot(aes(x = homeworld)) +
+  geom_bar() +
   coord_flip()
 ```
 
@@ -363,11 +388,11 @@ starwars |>
 ## Lumping Based On Counts {.smaller}
 
 ```{r}
-starwars |> 
-  filter( !is.na(homeworld) ) |>
-  mutate( homeworld = fct_lump_min(homeworld, 2)) |>
-  ggplot( aes(x=homeworld) ) + 
-  geom_bar() + 
+starwars |>
+  filter(!is.na(homeworld)) |>
+  mutate(homeworld = fct_lump_min(homeworld, 2)) |>
+  ggplot(aes(x = homeworld)) +
+  geom_bar() +
   coord_flip()
 ```
 
@@ -375,10 +400,10 @@ starwars |>
 
 ```{r}
 starwars |>
-  filter( !is.na(homeworld) ) |>
-  mutate( homeworld = fct_lump_n(homeworld, n=5)) |>
-  ggplot( aes(x=homeworld) ) + 
-  geom_bar() + 
+  filter(!is.na(homeworld)) |>
+  mutate(homeworld = fct_lump_n(homeworld, n = 5)) |>
+  ggplot(aes(x = homeworld)) +
+  geom_bar() +
   coord_flip()
 ```
 
@@ -387,11 +412,11 @@ starwars |>
 ## Counting Factors & Occurances
 
 ```{r}
-starwars |> 
-  filter( !is.na(homeworld) ) |> 
-  group_by( homeworld ) |> 
-  summarize( film = length(unique(films) ) ) |> 
-  arrange( -film )
+starwars |>
+  filter(!is.na(homeworld)) |>
+  group_by(homeworld) |>
+  summarize(film = length(unique(films))) |>
+  arrange(-film)
 ```
 
 
@@ -401,10 +426,10 @@ starwars |>
 
 ```{r}
 starwars |>
-  filter( !is.na(homeworld) ) |> 
-  mutate( homeworld = fct_anon( fct_lump( homeworld, n=6 ) ) ) |>
-  ggplot( aes(x=homeworld) ) + 
-  geom_bar() + 
+  filter(!is.na(homeworld)) |>
+  mutate(homeworld = fct_anon(fct_lump(homeworld, n = 6))) |>
+  ggplot(aes(x = homeworld)) +
+  geom_bar() +
   coord_flip()
 ```
 

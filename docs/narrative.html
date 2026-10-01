@@ -124,13 +124,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">sample</span>( weekdays, <span class="at">size=</span><span class="dv">40</span>, <span class="at">replace=</span><span class="cn">TRUE</span>)</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>data</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> [1] "Thursday"  "Wednesday" "Tuesday"   "Thursday"  "Monday"    "Saturday" 
- [7] "Tuesday"   "Sunday"    "Tuesday"   "Saturday"  "Saturday"  "Monday"   
-[13] "Saturday"  "Thursday"  "Wednesday" "Sunday"    "Saturday"  "Friday"   
-[19] "Sunday"    "Monday"    "Thursday"  "Thursday"  "Thursday"  "Thursday" 
-[25] "Saturday"  "Monday"    "Saturday"  "Thursday"  "Friday"    "Monday"   
-[31] "Wednesday" "Sunday"    "Friday"    "Friday"    "Saturday"  "Sunday"   
-[37] "Tuesday"   "Monday"    "Wednesday" "Monday"   </code></pre>
+<pre><code> [1] "Thursday"  "Thursday"  "Thursday"  "Sunday"    "Wednesday" "Wednesday"
+ [7] "Saturday"  "Thursday"  "Saturday"  "Friday"    "Tuesday"   "Monday"   
+[13] "Tuesday"   "Tuesday"   "Monday"    "Wednesday" "Friday"    "Saturday" 
+[19] "Saturday"  "Friday"    "Saturday"  "Tuesday"   "Saturday"  "Sunday"   
+[25] "Friday"    "Saturday"  "Sunday"    "Monday"    "Sunday"    "Saturday" 
+[31] "Saturday"  "Tuesday"   "Monday"    "Thursday"  "Friday"    "Friday"   
+[37] "Saturday"  "Sunday"    "Friday"    "Thursday" </code></pre>
 </div>
 </div>
 <p><mark>These data are still</mark></p>
@@ -156,18 +156,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>days</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> [1] Thursday  Wednesday Tuesday   Thursday  Monday    Saturday  Tuesday  
- [8] Sunday    Tuesday   Saturday  Saturday  Monday    Saturday  Thursday 
-[15] Wednesday Sunday    Saturday  Friday    Sunday    Monday    Thursday 
-[22] Thursday  Thursday  Thursday  Saturday  Monday    Saturday  Thursday 
-[29] Friday    Monday    Wednesday Sunday    Friday    Friday    Saturday 
-[36] Sunday    Tuesday   Monday    Wednesday Monday   
+<pre><code> [1] Thursday  Thursday  Thursday  Sunday    Wednesday Wednesday Saturday 
+ [8] Thursday  Saturday  Friday    Tuesday   Monday    Tuesday   Tuesday  
+[15] Monday    Wednesday Friday    Saturday  Saturday  Friday    Saturday 
+[22] Tuesday   Saturday  Sunday    Friday    Saturday  Sunday    Monday   
+[29] Sunday    Saturday  Saturday  Tuesday   Monday    Thursday  Friday   
+[36] Friday    Saturday  Sunday    Friday    Thursday 
 Levels: Friday Monday Saturday Sunday Thursday Tuesday Wednesday</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>( days )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   Friday    Monday  Saturday    Sunday  Thursday   Tuesday Wednesday 
-        4         7         8         5         8         4         4 </code></pre>
+        7         4        10         5         6         5         3 </code></pre>
 </div>
 </div>
 <p>We can put them into data frames and they know how to summarize themselves properly by counting the number of occurrences of each level.</p>
@@ -175,14 +175,14 @@ Levels: Friday Monday Saturday Sunday Thursday Tuesday Wednesday</code></pre>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>( <span class="at">ID =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">40</span>, <span class="at">Weekdays =</span> days )</span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>( df )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>       ID             Weekdays
- Min.   : 1.00   Friday   :4  
- 1st Qu.:10.75   Monday   :7  
- Median :20.50   Saturday :8  
- Mean   :20.50   Sunday   :5  
- 3rd Qu.:30.25   Thursday :8  
- Max.   :40.00   Tuesday  :4  
-                 Wednesday:4  </code></pre>
+<pre><code>       ID             Weekdays 
+ Min.   : 1.00   Friday   : 7  
+ 1st Qu.:10.75   Monday   : 4  
+ Median :20.50   Saturday :10  
+ Mean   :20.50   Sunday   : 5  
+ 3rd Qu.:30.25   Thursday : 6  
+ Max.   :40.00   Tuesday  : 5  
+                 Wednesday: 3  </code></pre>
 </div>
 </div>
 <p>And we can directly access the unique levels.</p>
@@ -212,12 +212,12 @@ Levels: Friday Monday Saturday Sunday Thursday Tuesday Wednesday</code></pre>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">factor</span>( days, <span class="at">ordered=</span><span class="cn">TRUE</span> )</span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>data </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> [1] Thursday  Wednesday Tuesday   Thursday  Monday    Saturday  Tuesday  
- [8] Sunday    Tuesday   Saturday  Saturday  Monday    Saturday  Thursday 
-[15] Wednesday Sunday    Saturday  Friday    Sunday    Monday    Thursday 
-[22] Thursday  Thursday  Thursday  Saturday  Monday    Saturday  Thursday 
-[29] Friday    Monday    Wednesday Sunday    Friday    Friday    Saturday 
-[36] Sunday    Tuesday   Monday    Wednesday Monday   
+<pre><code> [1] Thursday  Thursday  Thursday  Sunday    Wednesday Wednesday Saturday 
+ [8] Thursday  Saturday  Friday    Tuesday   Monday    Tuesday   Tuesday  
+[15] Monday    Wednesday Friday    Saturday  Saturday  Friday    Saturday 
+[22] Tuesday   Saturday  Sunday    Friday    Saturday  Sunday    Monday   
+[29] Sunday    Saturday  Saturday  Tuesday   Monday    Thursday  Friday   
+[36] Friday    Saturday  Sunday    Friday    Thursday 
 7 Levels: Friday &lt; Monday &lt; Saturday &lt; Sunday &lt; Thursday &lt; ... &lt; Wednesday</code></pre>
 </div>
 </div>
@@ -225,12 +225,12 @@ Levels: Friday Monday Saturday Sunday Thursday Tuesday Wednesday</code></pre>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sort</span>( data )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> [1] Friday    Friday    Friday    Friday    Monday    Monday    Monday   
+<pre><code> [1] Friday    Friday    Friday    Friday    Friday    Friday    Friday   
  [8] Monday    Monday    Monday    Monday    Saturday  Saturday  Saturday 
-[15] Saturday  Saturday  Saturday  Saturday  Saturday  Sunday    Sunday   
-[22] Sunday    Sunday    Sunday    Thursday  Thursday  Thursday  Thursday 
+[15] Saturday  Saturday  Saturday  Saturday  Saturday  Saturday  Saturday 
+[22] Sunday    Sunday    Sunday    Sunday    Sunday    Thursday  Thursday 
 [29] Thursday  Thursday  Thursday  Thursday  Tuesday   Tuesday   Tuesday  
-[36] Tuesday   Wednesday Wednesday Wednesday Wednesday
+[36] Tuesday   Tuesday   Wednesday Wednesday Wednesday
 7 Levels: Friday &lt; Monday &lt; Saturday &lt; Sunday &lt; Thursday &lt; ... &lt; Wednesday</code></pre>
 </div>
 </div>
@@ -240,12 +240,12 @@ Levels: Friday Monday Saturday Sunday Thursday Tuesday Wednesday</code></pre>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">factor</span>( days, <span class="at">ordered=</span><span class="cn">TRUE</span>, <span class="at">levels =</span> weekdays )</span>
 <span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>data</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> [1] Thursday  Wednesday Tuesday   Thursday  Monday    Saturday  Tuesday  
- [8] Sunday    Tuesday   Saturday  Saturday  Monday    Saturday  Thursday 
-[15] Wednesday Sunday    Saturday  Friday    Sunday    Monday    Thursday 
-[22] Thursday  Thursday  Thursday  Saturday  Monday    Saturday  Thursday 
-[29] Friday    Monday    Wednesday Sunday    Friday    Friday    Saturday 
-[36] Sunday    Tuesday   Monday    Wednesday Monday   
+<pre><code> [1] Thursday  Thursday  Thursday  Sunday    Wednesday Wednesday Saturday 
+ [8] Thursday  Saturday  Friday    Tuesday   Monday    Tuesday   Tuesday  
+[15] Monday    Wednesday Friday    Saturday  Saturday  Friday    Saturday 
+[22] Tuesday   Saturday  Sunday    Friday    Saturday  Sunday    Monday   
+[29] Sunday    Saturday  Saturday  Tuesday   Monday    Thursday  Friday   
+[36] Friday    Saturday  Sunday    Friday    Thursday 
 7 Levels: Monday &lt; Tuesday &lt; Wednesday &lt; Thursday &lt; Friday &lt; ... &lt; Sunday</code></pre>
 </div>
 </div>
@@ -253,10 +253,10 @@ Levels: Friday Monday Saturday Sunday Thursday Tuesday Wednesday</code></pre>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sort</span>( data )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> [1] Monday    Monday    Monday    Monday    Monday    Monday    Monday   
- [8] Tuesday   Tuesday   Tuesday   Tuesday   Wednesday Wednesday Wednesday
-[15] Wednesday Thursday  Thursday  Thursday  Thursday  Thursday  Thursday 
-[22] Thursday  Thursday  Friday    Friday    Friday    Friday    Saturday 
+<pre><code> [1] Monday    Monday    Monday    Monday    Tuesday   Tuesday   Tuesday  
+ [8] Tuesday   Tuesday   Wednesday Wednesday Wednesday Thursday  Thursday 
+[15] Thursday  Thursday  Thursday  Thursday  Friday    Friday    Friday   
+[22] Friday    Friday    Friday    Friday    Saturday  Saturday  Saturday 
 [29] Saturday  Saturday  Saturday  Saturday  Saturday  Saturday  Saturday 
 [36] Sunday    Sunday    Sunday    Sunday    Sunday   
 7 Levels: Monday &lt; Tuesday &lt; Wednesday &lt; Thursday &lt; Friday &lt; ... &lt; Sunday</code></pre>
@@ -273,12 +273,12 @@ generated</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>days</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> [1] Thursday  Wednesday &lt;NA&gt;      Thursday  Monday    Saturday  Tuesday  
- [8] Sunday    Tuesday   Saturday  Saturday  Monday    Saturday  Thursday 
-[15] Wednesday Sunday    Saturday  Friday    Sunday    Monday    Thursday 
-[22] Thursday  Thursday  Thursday  Saturday  Monday    Saturday  Thursday 
-[29] Friday    Monday    Wednesday Sunday    Friday    Friday    Saturday 
-[36] Sunday    Tuesday   Monday    Wednesday Monday   
+<pre><code> [1] Thursday  Thursday  &lt;NA&gt;      Sunday    Wednesday Wednesday Saturday 
+ [8] Thursday  Saturday  Friday    Tuesday   Monday    Tuesday   Tuesday  
+[15] Monday    Wednesday Friday    Saturday  Saturday  Friday    Saturday 
+[22] Tuesday   Saturday  Sunday    Friday    Saturday  Sunday    Monday   
+[29] Sunday    Saturday  Saturday  Tuesday   Monday    Thursday  Friday   
+[36] Friday    Saturday  Sunday    Friday    Thursday 
 Levels: Friday Monday Saturday Sunday Thursday Tuesday Wednesday</code></pre>
 </div>
 </div>
@@ -292,7 +292,7 @@ Levels: Friday Monday Saturday Sunday Thursday Tuesday Wednesday</code></pre>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>( workdays )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   Monday   Tuesday Wednesday  Thursday    Friday  Saturday    Sunday 
-       11         9         5         5        10         0         0 </code></pre>
+        8         7         9         8         8         0         0 </code></pre>
 </div>
 </div>
 <p>We can drop the levels that have no representation</p>
@@ -301,7 +301,7 @@ Levels: Friday Monday Saturday Sunday Thursday Tuesday Wednesday</code></pre>
 <span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>( workdays )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   Monday   Tuesday Wednesday  Thursday    Friday 
-       11         9         5         5        10 </code></pre>
+        8         7         9         8         8 </code></pre>
 </div>
 </div>
 </section>
@@ -320,12 +320,12 @@ Levels: Friday Monday Saturday Sunday Thursday Tuesday Wednesday</code></pre>
 <pre><code># A tibble: 7 × 2
   f             n
   &lt;ord&gt;     &lt;int&gt;
-1 Monday        7
-2 Tuesday       4
-3 Wednesday     4
-4 Thursday      8
-5 Friday        4
-6 Saturday      8
+1 Monday        4
+2 Tuesday       5
+3 Wednesday     3
+4 Thursday      6
+5 Friday        7
+6 Saturday     10
 7 Sunday        5</code></pre>
 </div>
 </div>
@@ -334,14 +334,15 @@ Levels: Friday Monday Saturday Sunday Thursday Tuesday Wednesday</code></pre>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>lumped <span class="ot">&lt;-</span> <span class="fu">fct_lump_min</span>( data, <span class="at">min =</span> <span class="dv">5</span> )</span>
 <span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a><span class="fu">fct_count</span>( lumped )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 5 × 2
+<pre><code># A tibble: 6 × 2
   f            n
   &lt;ord&gt;    &lt;int&gt;
-1 Monday       7
-2 Thursday     8
-3 Saturday     8
-4 Sunday       5
-5 Other       12</code></pre>
+1 Tuesday      5
+2 Thursday     6
+3 Friday       7
+4 Saturday    10
+5 Sunday       5
+6 Other        7</code></pre>
 </div>
 </div>
 <p><em>Reordering Factor Levels by Frequency</em></p>
@@ -349,8 +350,8 @@ Levels: Friday Monday Saturday Sunday Thursday Tuesday Wednesday</code></pre>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>freq <span class="ot">&lt;-</span> <span class="fu">fct_infreq</span>( data )</span>
 <span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>( freq )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "Thursday"  "Saturday"  "Monday"    "Sunday"    "Tuesday"   "Wednesday"
-[7] "Friday"   </code></pre>
+<pre><code>[1] "Saturday"  "Friday"    "Thursday"  "Tuesday"   "Sunday"    "Monday"   
+[7] "Wednesday"</code></pre>
 </div>
 </div>
 <p><em>Reordering by Order of Appearance</em></p>
@@ -358,8 +359,8 @@ Levels: Friday Monday Saturday Sunday Thursday Tuesday Wednesday</code></pre>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>ordered <span class="ot">&lt;-</span> <span class="fu">fct_inorder</span>( data )</span>
 <span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>( ordered )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "Thursday"  "Wednesday" "Tuesday"   "Monday"    "Saturday"  "Sunday"   
-[7] "Friday"   </code></pre>
+<pre><code>[1] "Thursday"  "Sunday"    "Wednesday" "Saturday"  "Friday"    "Tuesday"  
+[7] "Monday"   </code></pre>
 </div>
 </div>
 <p><em>Reordering Specific Levels</em></p>
@@ -377,7 +378,7 @@ Levels: Friday Monday Saturday Sunday Thursday Tuesday Wednesday</code></pre>
 <span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>( dropped )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   Monday   Tuesday Wednesday  Thursday    Friday 
-       11         9         5         5        10 </code></pre>
+        8         7         9         8         8 </code></pre>
 </div>
 </div>
 </section>
@@ -494,7 +495,7 @@ iris[, 5]: virginica
  Mean   :1.218                  
  3rd Qu.:1.800                  
  Max.   :2.500                  
- NAs    :3                      </code></pre>
+ NA's   :3                      </code></pre>
 </div>
 </div>
 <p>Notice how the missing data is denoted in the summary.</p>
@@ -624,9 +625,6 @@ missingIris$Species: virginica
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb82"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb82-1"><a href="#cb82-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>( kableExtra )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>Warning: package 'kableExtra' was built under R version 4.6.1</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
 <pre><code>
 Attaching package: 'kableExtra'</code></pre>
 </div>
@@ -640,7 +638,7 @@ Attaching package: 'kableExtra'</code></pre>
 <h3 class="anchored" data-anchor-id="table-themes">Table Themes</h3>
 <p>Here are some examples of Themes</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb86"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb86-1"><a href="#cb86-1" aria-hidden="true" tabindex="-1"></a><span class="fu">kable_paper</span>( irisTable )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb85"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb85-1"><a href="#cb85-1" aria-hidden="true" tabindex="-1"></a><span class="fu">kable_paper</span>( irisTable )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <table class="lightable-paper caption-top table table-sm table-striped small">
 <caption>The mean and variance in measured sepal length (in cm) for three species of Iris.</caption>
@@ -672,7 +670,7 @@ Attaching package: 'kableExtra'</code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb87"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb87-1"><a href="#cb87-1" aria-hidden="true" tabindex="-1"></a><span class="fu">kable_classic</span>( irisTable )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb86"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb86-1"><a href="#cb86-1" aria-hidden="true" tabindex="-1"></a><span class="fu">kable_classic</span>( irisTable )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <table class="lightable-classic caption-top table table-sm table-striped small">
 <caption>The mean and variance in measured sepal length (in cm) for three species of Iris.</caption>
@@ -704,7 +702,7 @@ Attaching package: 'kableExtra'</code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb88"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb88-1"><a href="#cb88-1" aria-hidden="true" tabindex="-1"></a><span class="fu">kable_classic_2</span>( irisTable )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb87"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb87-1"><a href="#cb87-1" aria-hidden="true" tabindex="-1"></a><span class="fu">kable_classic_2</span>( irisTable )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <table class="lightable-classic-2 caption-top table table-sm table-striped small">
 <caption>The mean and variance in measured sepal length (in cm) for three species of Iris.</caption>
@@ -736,7 +734,7 @@ Attaching package: 'kableExtra'</code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb89"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb89-1"><a href="#cb89-1" aria-hidden="true" tabindex="-1"></a><span class="fu">kable_minimal</span>( irisTable )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb88"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb88-1"><a href="#cb88-1" aria-hidden="true" tabindex="-1"></a><span class="fu">kable_minimal</span>( irisTable )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <table class="lightable-minimal caption-top table table-sm table-striped small">
 <caption>The mean and variance in measured sepal length (in cm) for three species of Iris.</caption>
@@ -768,7 +766,7 @@ Attaching package: 'kableExtra'</code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb90"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb90-1"><a href="#cb90-1" aria-hidden="true" tabindex="-1"></a><span class="fu">kable_material</span>( irisTable,<span class="at">lightable_options =</span> <span class="fu">c</span>(<span class="st">"striped"</span>, <span class="st">"hover"</span>) )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb89"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb89-1"><a href="#cb89-1" aria-hidden="true" tabindex="-1"></a><span class="fu">kable_material</span>( irisTable,<span class="at">lightable_options =</span> <span class="fu">c</span>(<span class="st">"striped"</span>, <span class="st">"hover"</span>) )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <table class="lightable-material lightable-striped lightable-hover caption-top table table-sm table-striped small">
 <caption>The mean and variance in measured sepal length (in cm) for three species of Iris.</caption>
@@ -800,7 +798,7 @@ Attaching package: 'kableExtra'</code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb91"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb91-1"><a href="#cb91-1" aria-hidden="true" tabindex="-1"></a><span class="fu">kable_material_dark</span>( irisTable )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb90"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb90-1"><a href="#cb90-1" aria-hidden="true" tabindex="-1"></a><span class="fu">kable_material_dark</span>( irisTable )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <table class="lightable-material-dark caption-top table table-sm table-striped small">
 <caption>The mean and variance in measured sepal length (in cm) for three species of Iris.</caption>
@@ -836,7 +834,7 @@ Attaching package: 'kableExtra'</code></pre>
 <h3 class="anchored" data-anchor-id="table-sizes-and-positions">Table Sizes and Positions</h3>
 <p>We can be specific about the size and location of the whole table.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb92"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb92-1"><a href="#cb92-1" aria-hidden="true" tabindex="-1"></a><span class="fu">kable_paper</span>(irisTable, <span class="at">full_width =</span> <span class="cn">FALSE</span> )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb91"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb91-1"><a href="#cb91-1" aria-hidden="true" tabindex="-1"></a><span class="fu">kable_paper</span>(irisTable, <span class="at">full_width =</span> <span class="cn">FALSE</span> )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <table class="lightable-paper caption-top table table-sm table-striped small">
 <caption>The mean and variance in measured sepal length (in cm) for three species of Iris.</caption>
@@ -868,7 +866,7 @@ Attaching package: 'kableExtra'</code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb93"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb93-1"><a href="#cb93-1" aria-hidden="true" tabindex="-1"></a><span class="fu">kable_paper</span>( irisTable, <span class="at">full_width=</span><span class="cn">FALSE</span>, <span class="at">position=</span><span class="st">"right"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb92"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb92-1"><a href="#cb92-1" aria-hidden="true" tabindex="-1"></a><span class="fu">kable_paper</span>( irisTable, <span class="at">full_width=</span><span class="cn">FALSE</span>, <span class="at">position=</span><span class="st">"right"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <table class="lightable-paper caption-top table table-sm table-striped small">
 <caption>The mean and variance in measured sepal length (in cm) for three species of Iris.</caption>
@@ -939,8 +937,8 @@ Attaching package: 'kableExtra'</code></pre>
 <h3 class="anchored" data-anchor-id="heading-judo">Heading Judo</h3>
 <p>We can do some really cool stuff on row and column headings. Here is an example where I add another row above the data columns for output.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb94"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb94-1"><a href="#cb94-1" aria-hidden="true" tabindex="-1"></a>classic <span class="ot">&lt;-</span> <span class="fu">kable_paper</span>( irisTable )</span>
-<span id="cb94-2"><a href="#cb94-2" aria-hidden="true" tabindex="-1"></a><span class="fu">add_header_above</span>( classic, <span class="fu">c</span>(<span class="st">" "</span> <span class="ot">=</span> <span class="dv">1</span>, <span class="st">"Sepal Length (cm)"</span> <span class="ot">=</span> <span class="dv">2</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb93"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb93-1"><a href="#cb93-1" aria-hidden="true" tabindex="-1"></a>classic <span class="ot">&lt;-</span> <span class="fu">kable_paper</span>( irisTable )</span>
+<span id="cb93-2"><a href="#cb93-2" aria-hidden="true" tabindex="-1"></a><span class="fu">add_header_above</span>( classic, <span class="fu">c</span>(<span class="st">" "</span> <span class="ot">=</span> <span class="dv">1</span>, <span class="st">"Sepal Length (cm)"</span> <span class="ot">=</span> <span class="dv">2</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <table class="lightable-paper caption-top table table-sm table-striped small">
 <caption>The mean and variance in measured sepal length (in cm) for three species of Iris.</caption>
